@@ -1,0 +1,128 @@
+package final2;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.event.MenuKeyEvent;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class final23 {
+	WebDriver x;
+	String url="https://www.makemytrip.com";
+	
+	@BeforeTest
+	public void Launch_URL() {
+		WebDriverManager.chromedriver().setup();
+		 ChromeOptions options  = new ChromeOptions();
+		    options.addArguments("--disable-popup-blocking");
+		    DesiredCapabilities capabilities = new DesiredCapabilities();
+		    capabilities.setCapability(ChromeOptions.CAPABILITY, options);
+		x=new ChromeDriver();
+		x.get(url);
+		x.manage().window().maximize();
+		x.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+	   
+	    
+		
+	}
+	@Test(enabled = false,priority = 0)
+	public void tc1() throws InterruptedException {
+		Thread.sleep(5000);
+		System.out.println("lets get start");
+		Thread.sleep(5000);
+		x.findElement(By.xpath("//*[@class='nsm7Bb-HzV7m-LgbsSe-Bz112c']")).click();
+		Thread.sleep(5000);
+		
+		ArrayList<String> y=new ArrayList<String>(x.getWindowHandles());
+		x.switchTo().window(y.get(1));
+		Thread.sleep(15000);
+		x.findElement(By.xpath("//*[@class='whsOnd zHQkBf']")).sendKeys("lakshmisha.hr@moolyaed.com");
+		Thread.sleep(15000);
+		x.findElement(By.xpath("(//*[@type='password'])")).sendKeys("4MH14mtp05#");
+		Thread.sleep(15000);
+		x.findElement(By.xpath("//*[@class='desktop in']")).click();
+	}
+	@Test(enabled = true,priority = 1)
+	public void tc2() throws InterruptedException, AWTException {
+		WebDriverWait z=new WebDriverWait(x, 5);
+		z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='chNavText darkGreyText'])[4]"))).click();
+		//z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@type='text'])[1]"))).sendKeys("Bangalore");
+		WebElement r=z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("((//*[@class='font14 blackText appendBottom6 autoSuggestValue'])")));
+		Actions j=new Actions(x);
+		j.moveToElement(r).click().build().perform();
+		 z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='dest-search-input'])"))).sendKeys("Singapore");
+		 WebElement u=z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='dest-city-container'])")));
+		j.moveToElement(u).click().build().perform();
+		
+	}
+	@Test(enabled = true,priority = 2)
+	public void date_Picker() throws InterruptedException, AWTException {
+		WebDriverWait z=new WebDriverWait(x, 5);
+		//z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@class='chNavText darkGreyText'])[4]"))).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='appendBottom5 blue-font up-arrow'])")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='dateInnerPara'])[2]")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@id='search_button'])")).click();
+		z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//*[@id='searchBtn'])"))).click();
+		Actions c=new Actions(x);
+		c.sendKeys(Keys.PAGE_DOWN);
+		c.sendKeys(Keys.PAGE_DOWN);
+		WebElement v=x.findElement(By.xpath("(//*[@class='rc-slider-handle rc-slider-handle-2'])[2]"));
+		WebElement b=x.findElement(By.xpath("(//*[@class='rc-slider-handle rc-slider-handle-1'])[2]"));
+		Robot p=new Robot();
+		c.moveToElement(v).dragAndDrop(v, b).build().perform();
+		
+		z.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='silderCardImage  active ']"))).click();
+		ArrayList<String> window=new ArrayList<String>(x.getWindowHandles());
+		x.switchTo().window(window.get(1));
+		c.sendKeys(Keys.PAGE_DOWN);
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@id='change'])[4]")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='changeRoom font10'])[3]")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='primaryBtn fill selectBtn'])[1]")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='close'])[2]")).click();
+		
+		
+		Thread.sleep(5000);
+		//add activity
+		x.findElement(By.xpath("(//*[@id='chooseAndAddBtn'])[2]")).click();
+		Thread.sleep(5000);
+		c.sendKeys(Keys.PAGE_DOWN);
+		c.sendKeys(Keys.PAGE_DOWN);
+		x.findElement(By.xpath("(//*[@class='primaryBtn fill selectBtn'])[8]")).click();
+		Thread.sleep(5000);
+		x.findElement(By.xpath("(//*[@class='close'])[2]")).click();
+		x.switchTo().window(window.get(0));
+		Thread.sleep(5000);
+		x.close();
+		Thread.sleep(5000);
+		
+	
+	}
+		
+		
+
+}
